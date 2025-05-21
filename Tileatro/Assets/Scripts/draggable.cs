@@ -17,6 +17,8 @@ public class draggable : MonoBehaviour
     [SerializeField]
     private LayerMask OtherObjectMask;
     [SerializeField]
+    private LayerMask PlayAreaMask;
+    [SerializeField]
     private Grid PlacementGrid;
 
     void Awake()
@@ -121,7 +123,20 @@ public class draggable : MonoBehaviour
         // Get mouse position in world coordinates
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // Move the tile to the mouse position
-        transform.position = PlacementGrid.LocalToCell(mousePos); //moves tile to mouse pos
+        RaycastHit2D hitPlayGrid = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, PlayAreaMask);
+
+
+        //moves tile to mouse pos
+        //move like grid if in grid area
+        if (!hitPlayGrid)
+        {
+            transform.position = mousePos;
+        }
+        else
+        {
+            transform.position = PlacementGrid.LocalToCell(mousePos);
+        }
+            
         //transform.SetParent(null);
     }
 
@@ -144,11 +159,16 @@ public class draggable : MonoBehaviour
         // Raycast from TargetChecker to check for valid tile and belts
         //RaycastHit2D hitValidTile = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, PlacementlayerMask);
         RaycastHit2D hitOtherObstacle = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, OtherObjectMask);
+        RaycastHit2D hitPlayGrid = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, PlayAreaMask);
 
         // Check if the position is valid
         if (hitOtherObstacle)//invalid placement spot
         {
             //Debug.Log("Invalid Spot");
+            DragTarget.transform.position = LastValidPosition; //4. DragTarget stays in place
+        }
+        else if (!hitPlayGrid)
+        {
             DragTarget.transform.position = LastValidPosition; //4. DragTarget stays in place
         }
         else//valid placement spot
