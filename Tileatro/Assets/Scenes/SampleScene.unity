@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 35241259}
   - component: {fileID: 35241261}
-  - component: {fileID: 35241260}
+  - component: {fileID: 35241262}
   m_Layer: 0
   m_Name: Square (1)
   m_TagString: Untagged
@@ -152,19 +152,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1677691826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &35241260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35241258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ad0ef3c5f423b4296c8424602a271d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridpos: {x: 0, y: 0, z: 0}
 --- !u!212 &35241261
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -220,6 +207,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &35241262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35241258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfad3305c55b7149bc5e4b9f73518b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovable: 1
+  SpawnDragTarget: {fileID: 2597501484328029883, guid: eee60a257f652a142abbece8f86e569a, type: 3}
+  SpawnTargetChecker: {fileID: 2503676958472793498, guid: 899225adbca29294db319eed233d5542, type: 3}
+  OtherObjectMask:
+    serializedVersion: 2
+    m_Bits: 0
+  PlacementGrid: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 527874034}
   - component: {fileID: 527874036}
-  - component: {fileID: 527874035}
+  - component: {fileID: 527874037}
   m_Layer: 0
   m_Name: Square (5)
   m_TagString: Untagged
@@ -390,19 +396,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1677691826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &527874035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 527874033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ad0ef3c5f423b4296c8424602a271d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridpos: {x: 0, y: 0, z: 0}
 --- !u!212 &527874036
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -458,6 +451,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &527874037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527874033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfad3305c55b7149bc5e4b9f73518b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovable: 1
+  SpawnDragTarget: {fileID: 2597501484328029883, guid: eee60a257f652a142abbece8f86e569a, type: 3}
+  SpawnTargetChecker: {fileID: 2503676958472793498, guid: 899225adbca29294db319eed233d5542, type: 3}
+  OtherObjectMask:
+    serializedVersion: 2
+    m_Bits: 0
+  PlacementGrid: {fileID: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,7 +564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 679104236}
   - component: {fileID: 679104238}
-  - component: {fileID: 679104237}
+  - component: {fileID: 679104239}
   m_Layer: 0
   m_Name: Square (2)
   m_TagString: Untagged
@@ -575,19 +587,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1677691826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &679104237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 679104235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ad0ef3c5f423b4296c8424602a271d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridpos: {x: 0, y: 0, z: 0}
 --- !u!212 &679104238
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -643,6 +642,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &679104239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679104235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfad3305c55b7149bc5e4b9f73518b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovable: 1
+  SpawnDragTarget: {fileID: 2597501484328029883, guid: eee60a257f652a142abbece8f86e569a, type: 3}
+  SpawnTargetChecker: {fileID: 2503676958472793498, guid: 899225adbca29294db319eed233d5542, type: 3}
+  OtherObjectMask:
+    serializedVersion: 2
+    m_Bits: 0
+  PlacementGrid: {fileID: 0}
 --- !u!1 &899651627
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,8 +686,8 @@ RectTransform:
   m_GameObject: {fileID: 899651627}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.00926, y: 0.00926, z: 0.00926}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1677691826}
   m_Father: {fileID: 0}
@@ -677,7 +695,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 600}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &945398901
 GameObject:
@@ -689,7 +707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 945398902}
   - component: {fileID: 945398904}
-  - component: {fileID: 945398903}
+  - component: {fileID: 945398905}
   m_Layer: 0
   m_Name: Square (6)
   m_TagString: Untagged
@@ -712,19 +730,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1677691826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &945398903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 945398901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ad0ef3c5f423b4296c8424602a271d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridpos: {x: 0, y: 0, z: 0}
 --- !u!212 &945398904
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -780,6 +785,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &945398905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945398901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfad3305c55b7149bc5e4b9f73518b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovable: 1
+  SpawnDragTarget: {fileID: 2597501484328029883, guid: eee60a257f652a142abbece8f86e569a, type: 3}
+  SpawnTargetChecker: {fileID: 2503676958472793498, guid: 899225adbca29294db319eed233d5542, type: 3}
+  OtherObjectMask:
+    serializedVersion: 2
+    m_Bits: 0
+  PlacementGrid: {fileID: 0}
 --- !u!1 &1131686816
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,7 +893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1475412711}
   - component: {fileID: 1475412713}
-  - component: {fileID: 1475412712}
+  - component: {fileID: 1475412714}
   m_Layer: 0
   m_Name: Square (4)
   m_TagString: Untagged
@@ -892,19 +916,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1677691826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1475412712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1475412710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ad0ef3c5f423b4296c8424602a271d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridpos: {x: 0, y: 0, z: 0}
 --- !u!212 &1475412713
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -960,6 +971,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1475412714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475412710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfad3305c55b7149bc5e4b9f73518b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovable: 1
+  SpawnDragTarget: {fileID: 2597501484328029883, guid: eee60a257f652a142abbece8f86e569a, type: 3}
+  SpawnTargetChecker: {fileID: 2503676958472793498, guid: 899225adbca29294db319eed233d5542, type: 3}
+  OtherObjectMask:
+    serializedVersion: 2
+    m_Bits: 0
+  PlacementGrid: {fileID: 0}
 --- !u!1 &1570798013
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,7 +1000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1570798014}
   - component: {fileID: 1570798016}
-  - component: {fileID: 1570798015}
+  - component: {fileID: 1570798017}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -993,19 +1023,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1677691826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1570798015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570798013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ad0ef3c5f423b4296c8424602a271d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridpos: {x: 0, y: 0, z: 0}
 --- !u!212 &1570798016
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1061,6 +1078,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1570798017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570798013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfad3305c55b7149bc5e4b9f73518b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovable: 1
+  SpawnDragTarget: {fileID: 2597501484328029883, guid: eee60a257f652a142abbece8f86e569a, type: 3}
+  SpawnTargetChecker: {fileID: 2503676958472793498, guid: 899225adbca29294db319eed233d5542, type: 3}
+  OtherObjectMask:
+    serializedVersion: 2
+    m_Bits: 0
+  PlacementGrid: {fileID: 0}
 --- !u!1 &1576346412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,7 +1107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1576346413}
   - component: {fileID: 1576346415}
-  - component: {fileID: 1576346414}
+  - component: {fileID: 1576346416}
   m_Layer: 0
   m_Name: Square (3)
   m_TagString: Untagged
@@ -1094,19 +1130,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1677691826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1576346414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1576346412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ad0ef3c5f423b4296c8424602a271d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridpos: {x: 0, y: 0, z: 0}
 --- !u!212 &1576346415
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1162,6 +1185,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1576346416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576346412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfad3305c55b7149bc5e4b9f73518b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovable: 1
+  SpawnDragTarget: {fileID: 2597501484328029883, guid: eee60a257f652a142abbece8f86e569a, type: 3}
+  SpawnTargetChecker: {fileID: 2503676958472793498, guid: 899225adbca29294db319eed233d5542, type: 3}
+  OtherObjectMask:
+    serializedVersion: 2
+    m_Bits: 0
+  PlacementGrid: {fileID: 0}
 --- !u!1 &1677691825
 GameObject:
   m_ObjectHideFlags: 0

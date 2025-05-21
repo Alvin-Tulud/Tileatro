@@ -10,10 +10,8 @@ public class draggable : MonoBehaviour
 
     public GameObject SpawnDragTarget;
     public GameObject SpawnTargetChecker;
-    public GameObject SpawnHoverSelect;
     private GameObject DragTarget;
     private GameObject TargetChecker;
-    private GameObject HoverSelect;
     private Vector3 LastValidPosition;
 
     [SerializeField]
@@ -70,17 +68,14 @@ public class draggable : MonoBehaviour
             }
         }
 
-        if (cardCollider == Physics2D.OverlapPoint(mousePos, OtherObjectMask) && HoverSelect == null)
+        //if mouse hovering over object
+        if (cardCollider == Physics2D.OverlapPoint(mousePos, OtherObjectMask))
         {
-            GameObject g;//store as gameobject and set them to be 
-            g = Instantiate(SpawnHoverSelect, transform.position, transform.rotation); //Creates HoverSelect
-            g.transform.position = Vector3.zero;
-            g.transform.SetParent(transform, false);
-            HoverSelect = g;
+            
         }
         else if (cardCollider != Physics2D.OverlapPoint(mousePos, OtherObjectMask))
         {
-            Destroy(HoverSelect);
+            
         }
     }
 
@@ -183,7 +178,6 @@ public class draggable : MonoBehaviour
                 this.transform.position = DragTarget.transform.position;
                 Destroy(DragTarget);
                 Destroy(TargetChecker);
-                Destroy(HoverSelect);
             }
         }
 
