@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class TileInfo : MonoBehaviour
 {
-    public Color tile_Color;
+    public ShapeColor tile_ShapeColor;
     public Mat tile_Mat;
-    public Shape tile_Shape;
 
-    public Sprite sprite_Color;
+    public Sprite sprite_ShapeColor;
     public Sprite sprite_Mat;
-    public Sprite sprite_Shape;
 
     public bool onPlayBoard;
 

@@ -128,14 +128,15 @@ public class draggable : MonoBehaviour
 
         //moves tile to mouse pos
         //move like grid if in grid area
-        if (!hitPlayGrid)
-        {
-            transform.position = mousePos;
-        }
-        else
-        {
-            transform.position = PlacementGrid.LocalToCell(mousePos);
-        }
+        transform.position = mousePos;
+        //if (!hitPlayGrid)
+        //{
+        //    transform.position = mousePos;
+        //}
+        //else
+        //{
+        //    transform.position = PlacementGrid.LocalToCell(mousePos);
+        //}
             
         //transform.SetParent(null);
     }

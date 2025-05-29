@@ -6,9 +6,8 @@ public class TileBag : MonoBehaviour
 {
     public GameObject baseTile;
 
-    public Sprite[] sprite_Colors;
+    public Sprite[] sprite_ShapeColor;
     public Sprite[] sprite_Mats;
-    public Sprite[] sprite_Shapes;
 
     public List<GameObject> totalBag;
     public List<GameObject> activeBag;
@@ -29,30 +28,25 @@ public class TileBag : MonoBehaviour
     //set bag of active tiles player will use
     private void createBag()
     {
-        //for each tile shape
-        for (int i = 0; i < 6; i++)
+        //for each tile shape color
+        for (int i = 0; i < 36; i++)
         {
-            //for each tile color
-            for(int j = 0; j < 6; j++)
+            //make 3 copies and add it to total bag
+            for (int j = 0; j < 3; j++)
             {
-                //make 3 copies and add it to total bag
-                for (int k = 0; k < 3; k++)
-                {
-                    GameObject newTile = Instantiate(baseTile);
-                    newTile.transform.SetParent(transform, false);
+                GameObject newTile = Instantiate(baseTile);
+                newTile.transform.SetParent(transform, false);
 
-                    TileInfo info = newTile.GetComponent<TileInfo>();
+                TileInfo info = newTile.GetComponent<TileInfo>();
 
-                    //set tile values
-                    info.tile_Shape = (Shape)i;
-                    info.tile_Color = (Color)j;
-                    info.tile_Mat = (Mat)0;
+                //set tile values
+                info.tile_ShapeColor = (ShapeColor)i;
+                info.tile_Mat = (Mat)0;
 
-                    totalBag.Add(newTile);
+                totalBag.Add(newTile);
 
-                    //set tile inactive in scene
-                    newTile.SetActive(false);
-                }
+                //set tile inactive in scene
+                newTile.SetActive(false);
             }
         }
         //shuffle active tile bag contents
