@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 665833354}
   - component: {fileID: 665833353}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: TileBag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -371,8 +371,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseTile: {fileID: 1570798013}
   sprite_Colors: []
-  sprite_Mats: []
+  sprite_Mats:
+  - {fileID: -2201701530162591893, guid: 1117aef763540d84298e3afaab0eadb7, type: 3}
+  - {fileID: -4454926070985514345, guid: 91ea1708ae5561e46a230f256928279e, type: 3}
+  - {fileID: -2351221527827088968, guid: c2a28d15eb6af93418e27f2cc8bc7101, type: 3}
+  - {fileID: 6348691186761396107, guid: e54da62e7b78e024cb0ca8a5c6fd7050, type: 3}
   sprite_Shapes: []
+  totalBag: []
+  activeBag: []
 --- !u!4 &665833354
 Transform:
   m_ObjectHideFlags: 0
