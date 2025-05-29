@@ -4,5 +4,6 @@ public enum Shape
     Circle,
     Triangle,
     Star,
-
+    Heart,
+    Diamond
 }
