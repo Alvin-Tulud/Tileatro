@@ -6,9 +6,6 @@ public class TileBag : MonoBehaviour
 {
     public GameObject baseTile;
 
-    public Sprite[] sprite_ShapeColor;
-    public Sprite[] sprite_Mats;
-
     public List<GameObject> totalBag;
     public List<GameObject> activeBag;
     private List<GameObject> usedBag;
@@ -32,7 +29,7 @@ public class TileBag : MonoBehaviour
         for (int i = 0; i < 36; i++)
         {
             //make 3 copies and add it to total bag
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < 1; j++)
             {
                 GameObject newTile = Instantiate(baseTile);
                 newTile.transform.SetParent(transform, false);
@@ -40,13 +37,12 @@ public class TileBag : MonoBehaviour
                 TileInfo info = newTile.GetComponent<TileInfo>();
 
                 //set tile values
-                info.tile_ShapeColor = (ShapeColor)i;
-                info.tile_Mat = (Mat)0;
+                info.setValues((ShapeColor)i, (Mat)1);
 
                 totalBag.Add(newTile);
 
                 //set tile inactive in scene
-                newTile.SetActive(false);
+                //newTile.SetActive(false);
             }
         }
         //shuffle active tile bag contents

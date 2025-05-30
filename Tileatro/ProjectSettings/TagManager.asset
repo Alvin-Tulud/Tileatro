@@ -13,7 +13,7 @@ TagManager:
   - UI
   - PlayGrid
   - Tile
-  - 
+  - TileRack
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Tile
+    uniqueID: 796454651
     locked: 0
   m_RenderingLayers:
   - Default
