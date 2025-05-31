@@ -19,6 +19,8 @@ public class draggable : MonoBehaviour
     [SerializeField]
     private LayerMask PlayAreaMask;
     [SerializeField]
+    private LayerMask TileRackMask;
+    [SerializeField]
     private Grid PlacementGrid;
 
     void Awake()
@@ -122,8 +124,10 @@ public class draggable : MonoBehaviour
     {
         // Get mouse position in world coordinates
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        transform.SetParent(null, false);
         // Move the tile to the mouse position
-        RaycastHit2D hitPlayGrid = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, PlayAreaMask);
+        //RaycastHit2D hitPlayGrid = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, PlayAreaMask);
 
 
         //moves tile to mouse pos
@@ -161,6 +165,7 @@ public class draggable : MonoBehaviour
         //RaycastHit2D hitValidTile = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, PlacementlayerMask);
         RaycastHit2D hitOtherObstacle = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, OtherObjectMask);
         RaycastHit2D hitPlayGrid = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, PlayAreaMask);
+        RaycastHit2D hitTileRack = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, TileRackMask);
 
         // Check if the position is valid
         if (hitOtherObstacle)//invalid placement spot
@@ -168,11 +173,16 @@ public class draggable : MonoBehaviour
             //Debug.Log("Invalid Spot");
             DragTarget.transform.position = LastValidPosition; //4. DragTarget stays in place
         }
-        else if (!hitPlayGrid)
+        else if (hitTileRack)
+        {
+            Debug.Log("over tilerack");
+            DragTarget.transform.SetParent(hitTileRack.transform, false);
+        }
+        else if (!hitPlayGrid)//not a spot on the playgrid
         {
             DragTarget.transform.position = LastValidPosition; //4. DragTarget stays in place
         }
-        else//valid placement spot
+        else//valid placement spot on playgrid
         {
             //Debug.Log("Valid Spot");
             DragTarget.transform.position = PlacementGrid.LocalToCell(mousePos); //3. move DragTarget to the checker's spot if it is valid
@@ -196,7 +206,16 @@ public class draggable : MonoBehaviour
             // Destroy target and targetChecker
             if (DragTarget != null)
             {
-                this.transform.position = DragTarget.transform.position;
+                if (DragTarget.transform.parent)
+                {
+                    transform.SetParent(DragTarget.transform.parent, false);
+                    transform.position = DragTarget.transform.parent.position;
+                }
+                else
+                {
+                    this.transform.position = DragTarget.transform.position;
+                }
+                    
                 Destroy(DragTarget);
                 Destroy(TargetChecker);
             }
