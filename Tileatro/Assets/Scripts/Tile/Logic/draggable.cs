@@ -20,8 +20,6 @@ public class draggable : MonoBehaviour
     private LayerMask PlayAreaMask;
     [SerializeField]
     private LayerMask TileRackMask;
-    [SerializeField]
-    private Grid PlacementGrid;
 
     void Awake()
     {
@@ -35,7 +33,6 @@ public class draggable : MonoBehaviour
         cardCollider = GetComponent<Collider2D>();
         canMove = false;
         dragging = false;
-        PlacementGrid = FindAnyObjectByType<Grid>();
     }
 
     void Update()
@@ -151,7 +148,7 @@ public class draggable : MonoBehaviour
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // Round TargetChecker's position to the nearest grid item
-        TargetChecker.transform.position = PlacementGrid.LocalToCell(mousePos); //1. Moves TargetChecker and rounds its pos to the tile grid
+        TargetChecker.transform.position = mousePos; //1. Moves TargetChecker and rounds its pos to the tile grid
         //Debug.Log("targetChecker: " + TargetChecker.transform.position);
         //Debug.Log("DragTarget: " + DragTarget.transform.position);
 
@@ -183,7 +180,7 @@ public class draggable : MonoBehaviour
         else//valid placement spot on playgrid
         {
             //Debug.Log("Valid Spot");
-            DragTarget.transform.position = PlacementGrid.LocalToCell(mousePos); //3. move DragTarget to the checker's spot if it is valid
+            DragTarget.transform.position = hitPlayGrid.transform.position; //3. move DragTarget to the checker's spot if it is valid
             LastValidPosition = DragTarget.transform.position;
         }
 

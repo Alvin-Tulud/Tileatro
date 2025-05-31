@@ -25,12 +25,6 @@ public class TileInfo : MonoBehaviour
         setValues((ShapeColor)0, (Mat)0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void setValues(ShapeColor sc, Mat m)
     {
         tile_ShapeColor = sc;
