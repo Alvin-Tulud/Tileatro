@@ -26,7 +26,7 @@ public class PlayGridGenerator : MonoBehaviour
         {
             for (int j = 0; j < playGrid.GetLength(1); j++)
             {
-                Debug.Log(i + " " +  j);
+                //Debug.Log(i + " " +  j);
 
                 GameObject spawnedTile = Instantiate(ValidTile, transform);
                 spawnedTile.transform.SetParent(transform, false);

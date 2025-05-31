@@ -6,6 +6,7 @@ public class draggable : MonoBehaviour
     public bool playerMovable;
     private bool canMove;
     private bool dragging;
+    private bool swapping;
     private Collider2D cardCollider;
 
     public GameObject SpawnDragTarget;
@@ -13,6 +14,7 @@ public class draggable : MonoBehaviour
     private GameObject DragTarget;
     private GameObject TargetChecker;
     private Vector3 LastValidPosition;
+    public Vector3 BeforeMovePosition;
 
     [SerializeField]
     private LayerMask OtherObjectMask;
@@ -20,6 +22,9 @@ public class draggable : MonoBehaviour
     private LayerMask PlayAreaMask;
     [SerializeField]
     private LayerMask TileRackMask;
+
+    private SpriteRenderer tileShapeColor;
+    private SpriteRenderer tileMat;
 
     void Awake()
     {
@@ -33,6 +38,12 @@ public class draggable : MonoBehaviour
         cardCollider = GetComponent<Collider2D>();
         canMove = false;
         dragging = false;
+        swapping = false;
+
+        BeforeMovePosition = transform.position;
+
+        tileShapeColor = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        tileMat = transform.GetChild(1).GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -72,11 +83,11 @@ public class draggable : MonoBehaviour
         //if mouse hovering over object
         if (cardCollider == Physics2D.OverlapPoint(mousePos, OtherObjectMask))
         {
-            
+            //transform.localScale = Vector3.one * 1.1f;
         }
         else if (cardCollider != Physics2D.OverlapPoint(mousePos, OtherObjectMask))
         {
-            
+            //transform.localScale = Vector3.one;
         }
     }
 
@@ -122,23 +133,14 @@ public class draggable : MonoBehaviour
         // Get mouse position in world coordinates
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        // Move the tile to the mouse position
-        //RaycastHit2D hitPlayGrid = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, PlayAreaMask);
+        tileShapeColor.sortingOrder = 3;
+        tileMat.sortingOrder = 2;
 
+        tileShapeColor.transform.localScale = Vector3.one * 1.25f;
+        tileMat.transform.localScale = Vector3.one * 1.25f;
 
         //moves tile to mouse pos
-        //move like grid if in grid area
         transform.position = mousePos;
-        //if (!hitPlayGrid)
-        //{
-        //    transform.position = mousePos;
-        //}
-        //else
-        //{
-        //    transform.position = PlacementGrid.LocalToCell(mousePos);
-        //}
-            
-        //transform.SetParent(null);
     }
 
     // Check the validity of the tile's position
@@ -167,7 +169,17 @@ public class draggable : MonoBehaviour
         if (hitOtherObstacle)//invalid placement spot
         {
             //Debug.Log("Invalid Spot");
-            DragTarget.transform.position = LastValidPosition; //4. DragTarget stays in place
+            //handle tiles swapping positions
+            if (hitOtherObstacle.transform.GetComponent<draggable>().playerMovable)
+            {
+                Debug.Log("overlap");
+                swapping = true;
+            }
+            else
+            {
+                Debug.Log("cant swap");
+                DragTarget.transform.position = LastValidPosition; //4. DragTarget stays in place
+            }
         }
         else if (hitTileRack)
         {
@@ -197,17 +209,41 @@ public class draggable : MonoBehaviour
             canMove = false;
             dragging = false;
 
+            tileShapeColor.sortingOrder = 1;
+            tileMat.sortingOrder = 0;
+
+            tileShapeColor.transform.localScale = Vector3.one;
+            tileMat.transform.localScale = Vector3.one;
+
             // Place the dragged tile at target location
             // Destroy target and targetChecker
             if (DragTarget != null)
             {
+                // check swapping
+                if (swapping)
+                {
+                    RaycastHit2D hitOtherObstacle = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, OtherObjectMask);
+
+                    Debug.Log("swapping");
+                    DragTarget.transform.position = hitOtherObstacle.transform.position;
+
+                    hitOtherObstacle.transform.position = BeforeMovePosition;
+
+                    hitOtherObstacle.transform.GetComponent<draggable>().setBeforeMovePosition(BeforeMovePosition);
+                    swapping = false;
+                }
+
                 this.transform.position = DragTarget.transform.position;
+                BeforeMovePosition = transform.position;
                     
                 Destroy(DragTarget);
                 Destroy(TargetChecker);
             }
         }
+    }
 
-        //recalculate astar grid after placing down the furniture
+    public void setBeforeMovePosition(Vector3 pos)
+    {
+        BeforeMovePosition = pos;
     }
 }
