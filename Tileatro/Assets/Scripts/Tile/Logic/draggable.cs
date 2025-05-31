@@ -125,7 +125,6 @@ public class draggable : MonoBehaviour
         // Get mouse position in world coordinates
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        transform.SetParent(null, false);
         // Move the tile to the mouse position
         //RaycastHit2D hitPlayGrid = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, PlayAreaMask);
 
@@ -176,7 +175,6 @@ public class draggable : MonoBehaviour
         else if (hitTileRack)
         {
             Debug.Log("over tilerack");
-            DragTarget.transform.SetParent(hitTileRack.transform, false);
         }
         else if (!hitPlayGrid)//not a spot on the playgrid
         {
@@ -206,15 +204,7 @@ public class draggable : MonoBehaviour
             // Destroy target and targetChecker
             if (DragTarget != null)
             {
-                if (DragTarget.transform.parent)
-                {
-                    transform.SetParent(DragTarget.transform.parent, false);
-                    transform.position = DragTarget.transform.parent.position;
-                }
-                else
-                {
-                    this.transform.position = DragTarget.transform.position;
-                }
+                this.transform.position = DragTarget.transform.position;
                     
                 Destroy(DragTarget);
                 Destroy(TargetChecker);
