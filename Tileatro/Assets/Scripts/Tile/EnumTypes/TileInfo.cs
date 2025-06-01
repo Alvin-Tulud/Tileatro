@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class TileInfo : MonoBehaviour
 {
-    public ShapeColor tile_ShapeColor;
+    public Color tile_Color;
+    public Shape tile_Shape;
     public Mat tile_Mat;
 
     public Sprite[] sprite_ShapeColor;
@@ -22,15 +23,16 @@ public class TileInfo : MonoBehaviour
         renderShapeColor = transform.GetChild(0).GetComponent<SpriteRenderer>();
         renderMat = transform.GetChild(1).GetComponent<SpriteRenderer>();
 
-        setValues((ShapeColor)0, (Mat)0);
+        setValues((Color)0, (Shape)0, (Mat)0);
     }
 
-    public void setValues(ShapeColor sc, Mat m)
+    public void setValues(Color c,Shape s, Mat m)
     {
-        tile_ShapeColor = sc;
+        tile_Color = c;
+        tile_Shape = s;
         tile_Mat = m;
 
-        displayShapeColor = sprite_ShapeColor[(int)sc];
+        displayShapeColor = sprite_ShapeColor[(6 * (int)c) + (int)s];
         displayMat = sprite_Mat[(int)m];
 
         renderShapeColor.sprite = displayShapeColor;

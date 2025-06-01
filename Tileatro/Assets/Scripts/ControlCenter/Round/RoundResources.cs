@@ -48,5 +48,13 @@ public class RoundResources : MonoBehaviour
         rerolls += r;
     }
 
+    public static void subtractTries()
+    {
+        tries -= 1;
+    }
 
+    public static void subtractRerolls()
+    {
+        rerolls -= 1;
+    }
 }
