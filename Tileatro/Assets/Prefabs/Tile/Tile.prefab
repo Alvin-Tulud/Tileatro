@@ -225,13 +225,16 @@ MonoBehaviour:
   playerMovable: 1
   SpawnDragTarget: {fileID: 2597501484328029883, guid: eee60a257f652a142abbece8f86e569a, type: 3}
   SpawnTargetChecker: {fileID: 2503676958472793498, guid: 899225adbca29294db319eed233d5542, type: 3}
+  BeforeMovePosition: {x: 0, y: 0, z: 0}
   OtherObjectMask:
     serializedVersion: 2
     m_Bits: 128
   PlayAreaMask:
     serializedVersion: 2
     m_Bits: 64
-  PlacementGrid: {fileID: 0}
+  TileRackMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!61 &6506770827243417315
 BoxCollider2D:
   m_ObjectHideFlags: 0

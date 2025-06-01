@@ -13,6 +13,7 @@ public class draggable : MonoBehaviour
     public GameObject SpawnTargetChecker;
     private GameObject DragTarget;
     private GameObject TargetChecker;
+    private GameObject SwapTarget;
     private Vector3 LastValidPosition;
     public Vector3 BeforeMovePosition;
 
@@ -173,6 +174,7 @@ public class draggable : MonoBehaviour
             if (hitOtherObstacle.transform.GetComponent<draggable>().playerMovable)
             {
                 Debug.Log("overlap");
+                SwapTarget = hitOtherObstacle.transform.gameObject;
                 swapping = true;
             }
             else
@@ -182,21 +184,25 @@ public class draggable : MonoBehaviour
                 DragTarget.transform.position = LastValidPosition; //4. DragTarget stays in place
             }
         }
-        else if (hitTileRack)
-        {
-            Debug.Log("over tilerack");
-            swapping = false;
-        }
-        else if (!hitPlayGrid)//not a spot on the playgrid
+        else if (!hitPlayGrid && !hitTileRack)//not a spot on the playgrid or tilerack
         {
             swapping = false;
             DragTarget.transform.position = LastValidPosition; //4. DragTarget stays in place
         }
         else//valid placement spot on playgrid
         {
+            if (hitPlayGrid)
+            {
+                DragTarget.transform.position = hitPlayGrid.transform.position; //3. move DragTarget to the checker's spot if it is valid
+            }
+            else if (hitTileRack)
+            {
+                DragTarget.transform.position = hitTileRack.transform.position; //3. move DragTarget to the checker's spot if it is valid
+            }
+
             //Debug.Log("Valid Spot");
             swapping = false;
-            DragTarget.transform.position = hitPlayGrid.transform.position; //3. move DragTarget to the checker's spot if it is valid
+            
             LastValidPosition = DragTarget.transform.position;
         }
 
@@ -226,14 +232,16 @@ public class draggable : MonoBehaviour
                 // check swapping
                 if (swapping)
                 {
-                    RaycastHit2D hitOtherObstacle = Physics2D.Raycast(TargetChecker.transform.position, TargetChecker.transform.forward, 0.1f, OtherObjectMask);
+                    Debug.Log("swapping: " + SwapTarget.transform.position);
+                    DragTarget.transform.position = SwapTarget.transform.position;
 
-                    Debug.Log("swapping");
-                    DragTarget.transform.position = hitOtherObstacle.transform.position;
+                    SwapTarget.transform.position = BeforeMovePosition;
+                    Debug.Log("moved: " + SwapTarget.transform.position);
 
-                    hitOtherObstacle.transform.position = BeforeMovePosition;
+                    SwapTarget.transform.GetComponent<draggable>().setBeforeMovePosition(BeforeMovePosition);
+                    SwapTarget.transform.GetComponent<draggable>().setLastValidPosition(BeforeMovePosition);
 
-                    hitOtherObstacle.transform.GetComponent<draggable>().setBeforeMovePosition(BeforeMovePosition);
+                    SwapTarget = null;
                     swapping = false;
                 }
 
@@ -244,6 +252,11 @@ public class draggable : MonoBehaviour
                 Destroy(TargetChecker);
             }
         }
+    }
+
+    public void setLastValidPosition(Vector3 pos)
+    {
+        LastValidPosition = pos;
     }
 
     public void setBeforeMovePosition(Vector3 pos)

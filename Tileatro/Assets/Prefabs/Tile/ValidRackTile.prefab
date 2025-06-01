@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5189595769347950130}
   - component: {fileID: 49159811810646385}
-  m_Layer: 6
-  m_Name: ValidTile
+  m_Layer: 8
+  m_Name: ValidRackTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
