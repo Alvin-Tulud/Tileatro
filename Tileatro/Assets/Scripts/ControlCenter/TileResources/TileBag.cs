@@ -32,10 +32,9 @@ public class TileBag : MonoBehaviour
             for (int j = 0; j < 6; j++)
             {
                 //make 3 copies and add it to total bag
-                for (int k = 0; k < 1; k++)
+                for (int k = 0; k < 3; k++)
                 {
-                    GameObject newTile = Instantiate(baseTile);
-                    newTile.transform.SetParent(transform, false);
+                    GameObject newTile = Instantiate(baseTile, transform.position, transform.rotation, transform);
 
                     TileInfo info = newTile.GetComponent<TileInfo>();
 
@@ -45,7 +44,7 @@ public class TileBag : MonoBehaviour
                     totalBag.Add(newTile);
 
                     //set tile inactive in scene
-                    //newTile.SetActive(false);
+                    newTile.SetActive(false);
                 }
             }
         }
@@ -53,7 +52,7 @@ public class TileBag : MonoBehaviour
         activeBag = shuffleBag(totalBag);
     }
 
-    //shuffle 
+    //shuffle
     private List<GameObject> shuffleBag(List<GameObject> bagtoShuffle)
     {
         List<GameObject> shuffledBag = new List<GameObject>();

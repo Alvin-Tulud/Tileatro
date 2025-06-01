@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class TileInfo : MonoBehaviour
 {
-    public Color tile_Color;
-    public Shape tile_Shape;
-    public Mat tile_Mat;
+    private Color tile_Color;
+    private Shape tile_Shape;
+    private Mat tile_Mat;
 
-    public Sprite[] sprite_ShapeColor;
-    public Sprite[] sprite_Mat;
+    private Sprite[] sprite_ShapeColor;
+    private Sprite[] sprite_Mat;
 
     private Sprite displayShapeColor;
     private Sprite displayMat;
@@ -37,5 +37,36 @@ public class TileInfo : MonoBehaviour
 
         renderShapeColor.sprite = displayShapeColor;
         renderMat.sprite = displayMat;
+    }
+
+    //-------------------getters and setters------------------------------
+    public void setColor(Color c)
+    {
+        setValues(c, tile_Shape, tile_Mat);
+    }
+
+    public void setShape(Shape s)
+    {
+        setValues(tile_Color, s, tile_Mat);
+    }
+
+    public void setMat(Mat m)
+    {
+        setValues(tile_Color, tile_Shape, m);
+    }
+
+    public Color getColor()
+    {
+        return tile_Color;
+    }
+
+    public Shape getShape()
+    {
+        return tile_Shape;
+    }
+
+    public Mat getMat()
+    {
+        return tile_Mat;
     }
 }

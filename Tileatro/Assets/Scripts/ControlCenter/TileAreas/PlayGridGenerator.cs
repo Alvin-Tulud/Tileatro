@@ -13,12 +13,6 @@ public class PlayGridGenerator : MonoBehaviour
         generateGrid();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void generateGrid()
     {
         Vector3 nextLocalPos = startingLocalPos;
@@ -40,5 +34,10 @@ public class PlayGridGenerator : MonoBehaviour
             nextLocalPos.x = startingLocalPos.x;
             nextLocalPos.y -= offset;
         }
+    }
+
+    public GameObject[,] getTileRack()
+    {
+        return playGrid;
     }
 }
