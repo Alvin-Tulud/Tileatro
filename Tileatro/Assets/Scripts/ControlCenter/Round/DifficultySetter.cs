@@ -10,6 +10,15 @@ public class DifficultySetter : MonoBehaviour
 
     public void setDifficulty(int difficulty)
     {
-
+        if (difficulty == 0)
+        {
+            RoundResources.setTries(tries_Normal);
+            RoundResources.setRerolls(rerolls_Normal);
+        }
+        else
+        {
+            RoundResources.setTries(tries_Hard);
+            RoundResources.setRerolls(rerolls_Hard);
+        }
     }
 }
