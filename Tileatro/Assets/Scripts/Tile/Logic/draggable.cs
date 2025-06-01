@@ -178,20 +178,24 @@ public class draggable : MonoBehaviour
             else
             {
                 Debug.Log("cant swap");
+                swapping = false;
                 DragTarget.transform.position = LastValidPosition; //4. DragTarget stays in place
             }
         }
         else if (hitTileRack)
         {
             Debug.Log("over tilerack");
+            swapping = false;
         }
         else if (!hitPlayGrid)//not a spot on the playgrid
         {
+            swapping = false;
             DragTarget.transform.position = LastValidPosition; //4. DragTarget stays in place
         }
         else//valid placement spot on playgrid
         {
             //Debug.Log("Valid Spot");
+            swapping = false;
             DragTarget.transform.position = hitPlayGrid.transform.position; //3. move DragTarget to the checker's spot if it is valid
             LastValidPosition = DragTarget.transform.position;
         }
