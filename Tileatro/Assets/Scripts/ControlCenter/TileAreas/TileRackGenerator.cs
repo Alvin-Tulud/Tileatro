@@ -7,13 +7,8 @@ public class TileRackGenerator : MonoBehaviour
     public float offset;
 
     private GameObject[] tileRack = new GameObject[6];
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        generateGrid();
-    }
 
-    private void generateGrid()
+    public void generateGrid()
     {
         Vector3 nextLocalPos = startingLocalPos;
         for (int i = 0; i < tileRack.GetLength(0); i++)

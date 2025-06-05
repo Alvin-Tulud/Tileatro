@@ -24,19 +24,9 @@ public class RoundResources : MonoBehaviour
         tries = t;
     }
 
-    public static void setRerolls(int r)
-    {
-        rerolls = r;
-    }
-
     public static int getTries()
     {
         return tries;
-    }
-
-    public static int getRerolls()
-    {
-        return rerolls;
     }
 
     public static void addTries(int t)
@@ -44,18 +34,8 @@ public class RoundResources : MonoBehaviour
         tries += t;
     }
 
-    public static void addRerolls(int r)
-    {
-        rerolls += r;
-    }
-
     public static void subtractTries()
     {
         tries -= 1;
-    }
-
-    public static void subtractRerolls()
-    {
-        rerolls -= 1;
     }
 }

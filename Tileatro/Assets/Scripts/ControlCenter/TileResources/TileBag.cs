@@ -9,6 +9,10 @@ public class TileBag : MonoBehaviour
     public List<GameObject> totalBag;
     public List<GameObject> activeBag;
     private List<GameObject> usedBag;
+    private List<GameObject> handBag;
+
+    private TileRackGenerator tileGen;
+    private GameObject[] tileRack;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,6 +20,11 @@ public class TileBag : MonoBehaviour
         totalBag = new List<GameObject>();
         activeBag = new List<GameObject>();
         usedBag = new List<GameObject>();
+        handBag = new List<GameObject>();
+
+        tileGen = FindAnyObjectByType<TileRackGenerator>();
+        tileGen.generateGrid();
+        tileRack = tileGen.getTileRack();
 
         createBag();
     }
@@ -39,7 +48,7 @@ public class TileBag : MonoBehaviour
                     TileInfo info = newTile.GetComponent<TileInfo>();
 
                     //set tile values
-                    info.setValues((Color)i, (Shape)j, (Mat)1);
+                    info.setValues((Color)i, (Shape)j, (Mat)0);
 
                     totalBag.Add(newTile);
 
@@ -63,6 +72,11 @@ public class TileBag : MonoBehaviour
     }
 
     public void rerollTiles()
+    {
+
+    }
+
+    private void dealHand()
     {
 
     }
