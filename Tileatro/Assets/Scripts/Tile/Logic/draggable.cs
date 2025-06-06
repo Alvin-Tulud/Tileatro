@@ -180,24 +180,27 @@ public class draggable : MonoBehaviour
             else
             {
                 Debug.Log("cant swap");
-                swapping = false;
                 DragTarget.transform.position = LastValidPosition; //4. DragTarget stays in place
+                swapping = false; 
             }
         }
         else if (!hitPlayGrid && !hitTileRack)//not a spot on the playgrid or tilerack
         {
-            swapping = false;
+            
             DragTarget.transform.position = LastValidPosition; //4. DragTarget stays in place
+            swapping = false;
         }
         else//valid placement spot on playgrid
         {
             if (hitPlayGrid)
             {
                 DragTarget.transform.position = hitPlayGrid.transform.position; //3. move DragTarget to the checker's spot if it is valid
+                GetComponent<TileInfo>().setOnePlayBoard(true);
             }
             else if (hitTileRack)
             {
                 DragTarget.transform.position = hitTileRack.transform.position; //3. move DragTarget to the checker's spot if it is valid
+                GetComponent<TileInfo>().setOnePlayBoard(false);
             }
 
             //Debug.Log("Valid Spot");
@@ -240,6 +243,11 @@ public class draggable : MonoBehaviour
 
                     SwapTarget.transform.GetComponent<draggable>().setBeforeMovePosition(BeforeMovePosition);
                     SwapTarget.transform.GetComponent<draggable>().setLastValidPosition(BeforeMovePosition);
+
+
+                    bool tempOnPlayBoard = GetComponent<TileInfo>().getOnePlayBoard();
+                    GetComponent<TileInfo>().setOnePlayBoard(SwapTarget.GetComponent<TileInfo>().getOnePlayBoard());
+                    SwapTarget.GetComponent<TileInfo>().setOnePlayBoard(tempOnPlayBoard);
 
                     SwapTarget = null;
                     swapping = false;

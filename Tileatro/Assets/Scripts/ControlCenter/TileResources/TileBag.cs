@@ -43,7 +43,8 @@ public class TileBag : MonoBehaviour
                 //make 3 copies and add it to total bag
                 for (int k = 0; k < 3; k++)
                 {
-                    GameObject newTile = Instantiate(baseTile, transform.position, transform.rotation, transform);
+                    GameObject newTile = Instantiate(baseTile);
+                    newTile.transform.SetParent(transform, false);
 
                     TileInfo info = newTile.GetComponent<TileInfo>();
 
@@ -76,7 +77,7 @@ public class TileBag : MonoBehaviour
 
     }
 
-    private void dealHand()
+    public void dealHand()
     {
 
     }

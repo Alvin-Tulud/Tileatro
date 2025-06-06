@@ -16,7 +16,6 @@ public class RoundResources : MonoBehaviour
     }
 
     private static int tries;
-    private static int rerolls;
 
     //-------------------getters and setters------------------------------
     public static void setTries(int t)

@@ -24,6 +24,8 @@ public class TileInfo : MonoBehaviour
         renderMat = transform.GetChild(1).GetComponent<SpriteRenderer>();
 
         setValues((Color)0, (Shape)0, (Mat)0);
+
+        onPlayBoard = false;
     }
 
     public void setValues(Color c,Shape s, Mat m)
@@ -55,6 +57,11 @@ public class TileInfo : MonoBehaviour
         setValues(tile_Color, tile_Shape, m);
     }
 
+    public void setOnePlayBoard(bool b)
+    {
+        onPlayBoard = b;
+    }
+
     public Color getColor()
     {
         return tile_Color;
@@ -68,5 +75,9 @@ public class TileInfo : MonoBehaviour
     public Mat getMat()
     {
         return tile_Mat;
+    }
+    public bool getOnePlayBoard()
+    {
+        return onPlayBoard;
     }
 }
