@@ -9,7 +9,7 @@ public class TileBag : MonoBehaviour
     public List<GameObject> totalBag;
     public List<GameObject> activeBag;
     private List<GameObject> usedBag;
-    private List<GameObject> handBag;
+    public GameObject[] handBag;
 
     private TileRackGenerator tileGen;
     private GameObject[] tileRack;
@@ -20,7 +20,7 @@ public class TileBag : MonoBehaviour
         totalBag = new List<GameObject>();
         activeBag = new List<GameObject>();
         usedBag = new List<GameObject>();
-        handBag = new List<GameObject>();
+        handBag = new GameObject[6];
 
         tileGen = FindAnyObjectByType<TileRackGenerator>();
         tileGen.generateGrid();
@@ -60,6 +60,8 @@ public class TileBag : MonoBehaviour
         }
         //shuffle active tile bag contents
         activeBag = shuffleBag(totalBag);
+
+        dealHand();
     }
 
     //shuffle
@@ -79,6 +81,28 @@ public class TileBag : MonoBehaviour
 
     public void dealHand()
     {
+        for (int i = 0;i < handBag.Length; i++)
+        {
+            if (handBag[i] == null)
+            {
+                handBag[i] = activeBag[0];
 
+                handBag[i].SetActive(true);
+
+                handBag[i].transform.position = tileRack[i].transform.position;
+                handBag[i].GetComponent<draggable>().setLastValidPosition(tileRack[i].transform.position);
+                handBag[i].GetComponent<draggable>().setBeforeMovePosition(tileRack[i].transform.position);
+
+                activeBag.RemoveAt(0);
+            }
+        }
+    }
+
+    public void addUsed(List<GameObject> tiles)
+    {
+        foreach(GameObject tile in tiles)
+        {
+            usedBag.Add(tile);
+        }
     }
 }

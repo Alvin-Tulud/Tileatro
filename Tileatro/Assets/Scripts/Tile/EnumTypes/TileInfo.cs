@@ -6,8 +6,8 @@ public class TileInfo : MonoBehaviour
     private Shape tile_Shape;
     private Mat tile_Mat;
 
-    private Sprite[] sprite_ShapeColor;
-    private Sprite[] sprite_Mat;
+    public Sprite[] sprite_ShapeColor;
+    public Sprite[] sprite_Mat;
 
     private Sprite displayShapeColor;
     private Sprite displayMat;
