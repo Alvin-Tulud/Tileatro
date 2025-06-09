@@ -266,8 +266,9 @@ GameObject:
   - component: {fileID: 461340876}
   - component: {fileID: 461340878}
   - component: {fileID: 461340879}
+  - component: {fileID: 461340880}
   m_Layer: 5
-  m_Name: Dots
+  m_Name: Moving Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -312,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 05e023a70817cf947acf3fa779f2606b, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -320,13 +321,28 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: 5e50b6aef31bc2e408c4bbd9c59242b0, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
+--- !u!114 &461340880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461340875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1859f4f9fb1b8e74e951d5c9b56d09a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  img: {fileID: 461340879}
+  x: 0.03
+  y: 0.03
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
