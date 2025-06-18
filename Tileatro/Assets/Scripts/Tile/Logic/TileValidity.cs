@@ -26,11 +26,13 @@ public class TileValidity : MonoBehaviour
 
         if (!checkTilesAlign())
         {
+            //Debug.Log("not aligned");
             return false;
         }
 
         if (!checkNoRepeat())
         {
+            //Debug.Log("repeating tiles");
             return false;
         }
 
@@ -46,10 +48,12 @@ public class TileValidity : MonoBehaviour
                 {
                     if (!checkNotAlone(findTile.transform.gameObject, i, j))
                     {
+                        //Debug.Log("tile alone");
                         return false;
                     }
                     if (!checkMatching(findTile.transform.gameObject))
                     {
+                        //Debug.Log("nearby mismatch");
                         return false;
                     }
                 }
@@ -214,18 +218,21 @@ public class TileValidity : MonoBehaviour
             }
         }
 
-        if (checkingColor)
+        if (findOtherTile)
         {
-            if (findOtherTile.transform.GetComponent<TileInfo>().getColor() != g.GetComponent<TileInfo>().getColor())
+            if (checkingColor)
             {
-                return false;
+                if (findOtherTile.transform.GetComponent<TileInfo>().getColor() != g.GetComponent<TileInfo>().getColor())
+                {
+                    return false;
+                }
             }
-        }
-        else if (checkingShape)
-        {
-            if (findOtherTile.transform.GetComponent<TileInfo>().getShape() != g.GetComponent<TileInfo>().getShape())
+            else if (checkingShape)
             {
-                return false;
+                if (findOtherTile.transform.GetComponent<TileInfo>().getShape() != g.GetComponent<TileInfo>().getShape())
+                {
+                    return false;
+                }
             }
         }
 
@@ -253,18 +260,21 @@ public class TileValidity : MonoBehaviour
             }
         }
 
-        if (checkingColor)
+        if (findOtherTile)
         {
-            if (findOtherTile.transform.GetComponent<TileInfo>().getColor() != g.GetComponent<TileInfo>().getColor())
+            if (checkingColor)
             {
-                return false;
+                if (findOtherTile.transform.GetComponent<TileInfo>().getColor() != g.GetComponent<TileInfo>().getColor())
+                {
+                    return false;
+                }
             }
-        }
-        else if (checkingShape)
-        {
-            if (findOtherTile.transform.GetComponent<TileInfo>().getShape() != g.GetComponent<TileInfo>().getShape())
+            else if (checkingShape)
             {
-                return false;
+                if (findOtherTile.transform.GetComponent<TileInfo>().getShape() != g.GetComponent<TileInfo>().getShape())
+                {
+                    return false;
+                }
             }
         }
 
@@ -295,7 +305,7 @@ public class TileValidity : MonoBehaviour
 
         for (int i = 0; i < FoundTiles.Count - 1; i++)
         {
-            for (int j = i; j < FoundTiles.Count; j++)
+            for (int j = i + 1; j < FoundTiles.Count; j++)
             {
                 if (FoundTiles[i].getColor() == FoundTiles[j].getColor() &&
                     FoundTiles[i].getShape() == FoundTiles[j].getShape())
@@ -319,6 +329,7 @@ public class TileValidity : MonoBehaviour
 
                         if (touching)
                         {
+                            //Debug.Log("found repeat X");
                             return false;
                         }
                     }
@@ -341,6 +352,7 @@ public class TileValidity : MonoBehaviour
 
                         if (touching)
                         {
+                            //Debug.Log("found repeat Y");
                             return false;
                         }
                     }

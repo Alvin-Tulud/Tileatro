@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8369a695209744eae3b67abf9c08f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileSpots: []
 --- !u!1 &441743729
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,6 +660,7 @@ MonoBehaviour:
   baseTile: {fileID: 7314586431614686216, guid: 2e4f6e66bc8aa4d41b4acd2e0d1338c8, type: 3}
   totalBag: []
   activeBag: []
+  usedBag: []
   handBag: []
 --- !u!4 &665833354
 Transform:
@@ -999,7 +1001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def6279fd32e3a54aac5f4c71d54aa74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileGenerateAmount: 12
+  tileGenerateAmount: 16
 --- !u!1 &1423720456
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class RoundManager : MonoBehaviour
     private bool doOnce;
 
     private TileGenerator tg;
-    public int tileGenerateAmount = 12;
+    public int tileGenerateAmount = 8;
     private State state;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -48,7 +48,7 @@ public class RoundManager : MonoBehaviour
             //run state
             if (doOnce)
             {
-                tg.setTiles(12);
+                tg.setTiles(tileGenerateAmount);
                 doOnce = false;
             }
         }

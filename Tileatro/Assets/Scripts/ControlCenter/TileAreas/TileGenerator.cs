@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 
 public class TileGenerator : MonoBehaviour
 {
@@ -9,19 +10,56 @@ public class TileGenerator : MonoBehaviour
     private PlayGridGenerator pgg;
 
     private GameObject[,] playGrid = new GameObject[6, 6];
+
+    private List<GameObject> tiles = new List<GameObject>();
+    public List<Vector3> tileSpots = new List<Vector3>();
+    private int tileCount;
+
+    private bool canMoveTiles;
+    private bool canCheck;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         tb = FindAnyObjectByType<TileBag>();
         tv = FindAnyObjectByType<TileValidity>();
         pgg = FindAnyObjectByType<PlayGridGenerator>();
+
+        canMoveTiles = true;
+        canCheck = true;
     }
 
-    public void setTiles(int tileCount)
+    private void Update()
     {
-        List<GameObject> tiles = tb.getTiles(tileCount);
-        List<Vector3> tileSpots = new List<Vector3>();
-        tileSpots = getTileSpots();
+        if (!tv.checkValidity() && canMoveTiles)
+        {
+            Debug.Log("invalid positions");
+            SetTilePosValid();
+        }
+        if (canCheck)
+        {
+            StartCoroutine(checkValid());
+        }
+    }
+
+    private IEnumerator checkValid()
+    {
+        canCheck = false;
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (tv.checkValidity())
+        {
+            canMoveTiles = false;
+        }
+
+        canCheck = true;
+    }
+
+    public void setTiles(int Count)
+    {
+        tiles = tb.getTiles(Count);
+        tileCount = Count;
 
         foreach (GameObject tile in tiles)
         {
@@ -30,26 +68,22 @@ public class TileGenerator : MonoBehaviour
             tile.GetComponent<TileInfo>().setOnePlayBoard(true);
         }
 
+        SetTilePosValid();
+    }
+
+    private void SetTilePosValid()
+    {
+        tileSpots = getTileSpots();
+
         for (int i = 0; i < tileCount; i++)
         {
             tiles[i].transform.position = tileSpots[i];
         }
-        Debug.Log("place tiles in spots");
 
-        tv.checkValidity();
-
-        while (!tv.checkValidity())
+        if (tv.checkValidity())
         {
-            tileSpots = getTileSpots();
-
-            for (int i = 0; i < tileCount; i++)
-            {
-                tiles[i].transform.position = tileSpots[i];
-            }
-            Debug.Log("non valid placements");
+            Debug.Log("Valid Spots Found");
         }
-
-        Debug.Log("done");
     }
     
     //converts tile grid into list and randomizes its order
@@ -57,18 +91,18 @@ public class TileGenerator : MonoBehaviour
     {
         playGrid = pgg.getTileRack();
 
-        List<Vector3> tileSpots = new List<Vector3>();
+        List<Vector3> Spots = new List<Vector3>();
 
         for (int i = 0; i < playGrid.GetLength(0); i++)
         {
             for (int j = 0; j < playGrid.GetLength(1); j++)
             {
-                tileSpots.Add(playGrid[i, j].transform.position);
+                Spots.Add(playGrid[i, j].transform.position);
             }
         }
 
-        tileSpots = tileSpots.OrderBy(x => Random.value).ToList();
+        Spots = Spots.OrderBy(x => Random.value).ToList();
 
-        return tileSpots;
+        return Spots;
     }
 }
