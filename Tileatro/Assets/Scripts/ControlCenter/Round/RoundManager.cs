@@ -19,7 +19,7 @@ public class RoundManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        tg = FindAnyObjectByType(typeof(TileGenerator)) as TileGenerator;
+        tg = FindAnyObjectByType<TileGenerator>();
         doOnce = true;
     }
 

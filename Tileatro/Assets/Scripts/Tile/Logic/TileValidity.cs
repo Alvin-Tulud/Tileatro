@@ -16,12 +16,6 @@ public class TileValidity : MonoBehaviour
         pgg = FindAnyObjectByType<PlayGridGenerator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //check if placed tile is by itself
     //check if placed tiles are in a line
     //check if placed tiles are matching shape or color in row and column
@@ -142,46 +136,50 @@ public class TileValidity : MonoBehaviour
 
         bool checkHorizontal = false;
         bool checkVertical = false;
-        Vector3 prevTile = FoundPlacedTilesPos[0];
 
-        for (int i = 1; i < FoundPlacedTilesPos.Count; i++)
+        if (FoundPlacedTilesPos.Count > 0)
         {
-            //set if we're checking horizontal or vertical
-            //if next tile doesn't match either return false
-            if (i == 1)
+            Vector3 prevTile = FoundPlacedTilesPos[0];
+
+            for (int i = 1; i < FoundPlacedTilesPos.Count; i++)
             {
-                if (Mathf.RoundToInt(prevTile.x) == Mathf.RoundToInt(FoundPlacedTilesPos[i].x))
+                //set if we're checking horizontal or vertical
+                //if next tile doesn't match either return false
+                if (i == 1)
                 {
-                    checkHorizontal = true;
-                }
-                else if (Mathf.RoundToInt(prevTile.y) == Mathf.RoundToInt(FoundPlacedTilesPos[i].y))
-                {
-                    checkVertical = true;
+                    if (Mathf.RoundToInt(prevTile.x) == Mathf.RoundToInt(FoundPlacedTilesPos[i].x))
+                    {
+                        checkHorizontal = true;
+                    }
+                    else if (Mathf.RoundToInt(prevTile.y) == Mathf.RoundToInt(FoundPlacedTilesPos[i].y))
+                    {
+                        checkVertical = true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
-                    return false;
-                }
-            }
-            else
-            {
-                if (checkHorizontal)
-                {
-                    if (Mathf.RoundToInt(prevTile.x) != Mathf.RoundToInt(FoundPlacedTilesPos[i].x))
+                    if (checkHorizontal)
                     {
-                        return false;
+                        if (Mathf.RoundToInt(prevTile.x) != Mathf.RoundToInt(FoundPlacedTilesPos[i].x))
+                        {
+                            return false;
+                        }
+                    }
+                    else if (checkVertical)
+                    {
+                        if (Mathf.RoundToInt(prevTile.y) == Mathf.RoundToInt(FoundPlacedTilesPos[i].y))
+                        {
+                            return false;
+                        }
                     }
                 }
-                else if (checkVertical)
-                {
-                    if (Mathf.RoundToInt(prevTile.y) == Mathf.RoundToInt(FoundPlacedTilesPos[i].y))
-                    {
-                        return false;
-                    }
-                }
-            }
 
-            prevTile = FoundPlacedTilesPos[i];
+                prevTile = FoundPlacedTilesPos[i];
+            }
         }
 
         return true;
