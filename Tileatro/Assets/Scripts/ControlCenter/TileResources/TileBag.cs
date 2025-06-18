@@ -8,7 +8,7 @@ public class TileBag : MonoBehaviour
 
     public List<GameObject> totalBag;
     public List<GameObject> activeBag;
-    private List<GameObject> usedBag;
+    public List<GameObject> usedBag;
     public GameObject[] handBag;
 
     private TileRackGenerator tileGen;
@@ -104,5 +104,19 @@ public class TileBag : MonoBehaviour
         {
             usedBag.Add(tile);
         }
+    }
+
+    public List<GameObject> getTiles(int tileCount)
+    {
+        List<GameObject> returnTiles = new List<GameObject>();
+
+        for (int i = 0; i < tileCount; i++)
+        {
+            usedBag.Add(activeBag[0]);
+            returnTiles.Add(activeBag[0]);
+            activeBag.RemoveAt(0);
+        }
+
+        return returnTiles;
     }
 }

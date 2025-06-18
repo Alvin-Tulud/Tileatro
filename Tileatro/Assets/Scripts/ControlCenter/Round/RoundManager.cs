@@ -10,13 +10,17 @@ public class RoundManager : MonoBehaviour
     }
 
     private int RoundCount;
+    private bool doOnce;
 
+    private TileGenerator tg;
+    public int tileGenerateAmount = 12;
     private State state;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        tg = FindAnyObjectByType(typeof(TileGenerator)) as TileGenerator;
+        doOnce = true;
     }
 
     // Update is called once per frame
@@ -42,9 +46,15 @@ public class RoundManager : MonoBehaviour
         if (true)
         {
             //run state
+            if (doOnce)
+            {
+                tg.setTiles(12);
+                doOnce = false;
+            }
         }
         else
         {
+            doOnce = true;
             state = State.Shop;
         }
     }
@@ -54,9 +64,14 @@ public class RoundManager : MonoBehaviour
         if (true)
         {
             //run state
+            if (doOnce)
+            {
+                doOnce = false;
+            }
         }
         else
         {
+            doOnce = true;
             state = State.Game;
         }
     }
