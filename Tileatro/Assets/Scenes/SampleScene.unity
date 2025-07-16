@@ -1001,7 +1001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def6279fd32e3a54aac5f4c71d54aa74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileGenerateAmount: 12
+  tileGenerateAmount: 2
 --- !u!1 &1423720456
 GameObject:
   m_ObjectHideFlags: 0

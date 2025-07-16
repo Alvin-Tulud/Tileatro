@@ -6,14 +6,11 @@ using UnityEngine.Rendering.Universal;
 
 public class TileValidity : MonoBehaviour
 {
-    private PlayGridGenerator pgg;
-    private GameObject[,] playGrid = new GameObject[6, 6];
-
     public LayerMask TileMask;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        pgg = FindAnyObjectByType<PlayGridGenerator>();
+        
     }
 
     //check if placed tile is by itself
@@ -22,41 +19,37 @@ public class TileValidity : MonoBehaviour
     //check if repeating tiles in row and column
     public bool checkValidity()
     {
-        playGrid = pgg.getTileRack();
-
-        if (!checkTilesAlign())
+        draggable[] TilesFound = FindObjectsByType<draggable>(FindObjectsSortMode.None);
+        List<GameObject> TilePos = new List<GameObject>();
+        for (int i = 0; i < TilesFound.Length; i++)
         {
-            //Debug.Log("not aligned");
+            TilePos.Add(TilesFound[i].gameObject);
+        }
+
+        if (!checkTilesAlign(TilePos))
+        {
+            Debug.Log("not aligned");
             return false;
         }
 
-        if (!checkNoRepeat())
+        if (!checkNoRepeat(TilePos))
         {
-            //Debug.Log("repeating tiles");
+            Debug.Log("repeating tiles");
             return false;
         }
 
         //traverse through entire grid
-        for (int i = 0; i < playGrid.GetLength(0); i++)
+        for (int i = 0; i < TilePos.Count; i++)
         {
-            for (int j = 0; j < playGrid.GetLength(1); j++)
+            if (!checkNotAlone(TilePos[i]))
             {
-                //if raycast finds a tile
-                RaycastHit2D findTile = Physics2D.CircleCast(playGrid[i, j].transform.position, 0.1f, Vector2.zero, 0f, TileMask);
-
-                if (findTile)
-                {
-                    if (!checkNotAlone(findTile.transform.gameObject, i, j))
-                    {
-                        //Debug.Log("tile alone");
-                        return false;
-                    }
-                    if (!checkMatching(findTile.transform.gameObject))
-                    {
-                        //Debug.Log("nearby mismatch");
-                        return false;
-                    }
-                }
+                Debug.Log("tile alone");
+                return false;
+            }
+            if (!checkMatching(TilePos[i]))
+            {
+                Debug.Log("nearby mismatch");
+                return false;
             }
         }
 
@@ -64,54 +57,22 @@ public class TileValidity : MonoBehaviour
     }
 
     //if tile is placed check make sure it has neighbors
-    private bool checkNotAlone(GameObject g, int posX, int posY)
+    private bool checkNotAlone(GameObject g)
     {
-        //if false checks = 4 theres no tile around the tile so its invalid
-        int falseChecks = 0;
-
         if (g.GetComponent<draggable>().playerMovable)
         {
-            if (posX >= 0 && posX < playGrid.Length)//check right, obj not on right wall
+            RaycastHit2D findTileRight = Physics2D.CircleCast(g.transform.position + Vector3.right, 0.1f, Vector2.zero, 0f, TileMask);
+            RaycastHit2D findTileUp = Physics2D.CircleCast(g.transform.position + Vector3.up, 0.1f, Vector2.zero, 0f, TileMask);
+            RaycastHit2D findTileLeft = Physics2D.CircleCast(g.transform.position + Vector3.left, 0.1f, Vector2.zero, 0f, TileMask);
+            RaycastHit2D findTileDown = Physics2D.CircleCast(g.transform.position + Vector3.down, 0.1f, Vector2.zero, 0f, TileMask);
+
+            if (!findTileRight ||
+                !findTileUp ||
+                !findTileLeft ||
+                !findTileDown)
             {
-                RaycastHit2D findTile = Physics2D.CircleCast(g.transform.position + Vector3.right, 0.1f, Vector2.zero, 0f, TileMask);
-
-                if (!findTile)
-                {
-                    falseChecks++;
-                }
+                return false;
             }
-            if (posY >= 0 && posY < playGrid.Length)//check up, obj not on bottom wall
-            {
-                RaycastHit2D findTile = Physics2D.CircleCast(g.transform.position + Vector3.up, 0.1f, Vector2.zero, 0f, TileMask);
-
-                if (!findTile)
-                {
-                    falseChecks++;
-                }
-            }
-            if (posX > 0 && posX <= playGrid.Length)//check left, obj not on left wall
-            {
-                RaycastHit2D findTile = Physics2D.CircleCast(g.transform.position + Vector3.left, 0.1f, Vector2.zero, 0f, TileMask);
-
-                if (!findTile)
-                {
-                    falseChecks++;
-                }
-            }
-            if (posY > 0 && posY <= playGrid.Length)//check down, obj not on top wall
-            {
-                RaycastHit2D findTile = Physics2D.CircleCast(g.transform.position + Vector3.down, 0.1f, Vector2.zero, 0f, TileMask);
-
-                if (!findTile)
-                {
-                    falseChecks++;
-                }
-            }
-        }
-
-        if (falseChecks == 4)
-        {
-            return false;
         }
 
         return true;
@@ -119,22 +80,16 @@ public class TileValidity : MonoBehaviour
 
     //iterate through all tiles and add them to the list
     //check after if any aren't matching x or y and throw false
-    private bool checkTilesAlign()
+    private bool checkTilesAlign(List<GameObject> TilePos)
     {
         List<Vector3> FoundPlacedTilesPos = new List<Vector3>();
 
-        //traverse through entire grid
-        for (int i = 0; i < playGrid.GetLength(0); i++)
+        foreach (GameObject g in TilePos)
         {
-            for (int j = 0; j < playGrid.GetLength(1); j++)
+            if (g.GetComponent<draggable>().playerMovable)
             {
-                //if raycast finds a tile
-                RaycastHit2D findTile = Physics2D.CircleCast(playGrid[i, j].transform.position, 0.1f, Vector2.zero, 0f, TileMask);
-
-                if (findTile && findTile.transform.GetComponent<draggable>().playerMovable)
-                {
-                    FoundPlacedTilesPos.Add(findTile.transform.position);
-                }
+                Debug.Log(g.GetComponent<draggable>().playerMovable);
+                FoundPlacedTilesPos.Add(g.gameObject.transform.position);
             }
         }
 
@@ -282,44 +237,25 @@ public class TileValidity : MonoBehaviour
     }
 
     //make sure not tiles in row or column are repeating if they are not connected in a line
-    private bool checkNoRepeat()
+    private bool checkNoRepeat(List<GameObject> TilePos)
     {
-        List<Vector3> FoundTilesPos = new List<Vector3>();
-        List<TileInfo> FoundTiles = new List<TileInfo>();
-
-        //traverse through entire grid
-        for (int i = 0; i < playGrid.GetLength(0); i++)
+        for (int i = 0; i < TilePos.Count - 1; i++)
         {
-            for (int j = 0; j < playGrid.GetLength(1); j++)
+            for (int j = i + 1; j < TilePos.Count; j++)
             {
-                //if raycast finds a tile
-                RaycastHit2D findTile = Physics2D.CircleCast(playGrid[i, j].transform.position, 0.1f, Vector2.zero, 0f, TileMask);
-
-                if (findTile)
+                if (TilePos[i].GetComponent<TileInfo>().getColor() == TilePos[j].GetComponent<TileInfo>().getColor() &&
+                    TilePos[i].GetComponent<TileInfo>().getShape() == TilePos[j].GetComponent<TileInfo>().getShape())
                 {
-                    FoundTilesPos.Add(findTile.transform.position);
-                    FoundTiles.Add(findTile.transform.GetComponent<TileInfo>());
-                }
-            }
-        }
-
-        for (int i = 0; i < FoundTiles.Count - 1; i++)
-        {
-            for (int j = i + 1; j < FoundTiles.Count; j++)
-            {
-                if (FoundTiles[i].getColor() == FoundTiles[j].getColor() &&
-                    FoundTiles[i].getShape() == FoundTiles[j].getShape())
-                {
-                    if (Mathf.RoundToInt(FoundTilesPos[i].x) == Mathf.RoundToInt(FoundTilesPos[j].x))
+                    if (Mathf.RoundToInt(TilePos[i].transform.position.x) == Mathf.RoundToInt(TilePos[j].transform.position.x))
                     {
                         //check all tiles along y axis to see if they meet
-                        int distance = Mathf.RoundToInt(FoundTilesPos[i].y - FoundTilesPos[j].y);
+                        int distance = Mathf.RoundToInt(TilePos[i].transform.position.y - TilePos[j].transform.position.y);
 
                         bool touching = true;
 
                         for (int k = 1; k < distance; k++)
                         {
-                            RaycastHit2D findTile = Physics2D.CircleCast(FoundTilesPos[i] + Vector3.down * distance, 0.1f, Vector2.zero, 0f, TileMask);
+                            RaycastHit2D findTile = Physics2D.CircleCast(TilePos[i].transform.position + Vector3.down * distance, 0.1f, Vector2.zero, 0f, TileMask);
 
                             if (!findTile)
                             {
@@ -333,16 +269,16 @@ public class TileValidity : MonoBehaviour
                             return false;
                         }
                     }
-                    else if (Mathf.RoundToInt(FoundTilesPos[i].y) == Mathf.RoundToInt(FoundTilesPos[j].y))
+                    else if (Mathf.RoundToInt(TilePos[i].transform.position.y) == Mathf.RoundToInt(TilePos[j].transform.position.y))
                     {
                         //check all tiles along x axis to see if they meet
-                        int distance = Mathf.RoundToInt(FoundTilesPos[i].x - FoundTilesPos[j].x);
+                        int distance = Mathf.RoundToInt(TilePos[i].transform.position.x - TilePos[j].transform.position.x);
 
                         bool touching = true;
 
                         for (int k = 1; k < distance; k++)
                         {
-                            RaycastHit2D findTile = Physics2D.CircleCast(FoundTilesPos[i] + Vector3.right * distance, 0.1f, Vector2.zero, 0f, TileMask);
+                            RaycastHit2D findTile = Physics2D.CircleCast(TilePos[i].transform.position + Vector3.right * distance, 0.1f, Vector2.zero, 0f, TileMask);
 
                             if (!findTile)
                             {

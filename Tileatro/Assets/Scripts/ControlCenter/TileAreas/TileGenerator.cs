@@ -29,7 +29,7 @@ public class TileGenerator : MonoBehaviour
         canCheck = true;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!tv.checkValidity() && canMoveTiles)
         {
@@ -66,6 +66,8 @@ public class TileGenerator : MonoBehaviour
             tile.SetActive(true);
             tile.GetComponent<draggable>().playerMovable = false;
             tile.GetComponent<TileInfo>().setOnePlayBoard(true);
+            tile.GetComponent<draggable>().playerMovable = false;
+            Debug.Log(tile.GetComponent<draggable>().playerMovable);
         }
 
         SetTilePosValid();
